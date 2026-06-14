@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zerox.movies.ir | تماشای فیلم و سریال</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --red:#B61C1C;
+  --dark:#292929;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Vazirmatn',sans-serif;
+  font-weight:700;
+}
+
+body{
+  background:var(--dark);
+  color:white;
+}
+
+/* HEADER */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.75);
+  backdrop-filter:blur(12px);
+  border-bottom:2px solid var(--red);
+  z-index:1000;
+}
+
+.logo{
+  color:var(--red);
+  font-size:24px;
+  text-shadow:0 0 20px var(--red);
+}
+
+input{
+  padding:8px 12px;
+  border-radius:20px;
+  border:none;
+  outline:none;
+  width:180px;
+}
+
+/* HERO */
+.hero{
+  margin-top:70px;
+  height:60vh;
+  position:relative;
+  overflow:hidden;
+}
+
+.slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  opacity:0;
+  transition:1s ease;
+  background-size:cover;
+  background-position:center;
+}
+
+.slide.active{
+  opacity:1;
+}
+
+.hero-text{
+  position:absolute;
+  bottom:25px;
+  right:25px;
+  background:rgba(0,0,0,0.5);
+  padding:20px;
+  border-right:4px solid var(--red);
+  max-width:400px;
+}
+
+/* ROWS */
+section{
+  padding:25px 6%;
+}
+
+h2{
+  color:var(--red);
+  margin-bottom:15px;
+}
+
+.row{
+  display:flex;
+  overflow-x:auto;
+  gap:12px;
+  scroll-behavior:smooth;
+}
+
+.row::-webkit-scrollbar{
+  display:none;
+}
+
+/* CARD */
+.card{
+  min-width:160px;
+  height:240px;
+  border-radius:15px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.3s;
+  position:relative;
+}
+
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.card:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 20px var(--red);
+}
+
+.card span{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:8px;
+  text-align:center;
+  background:linear-gradient(transparent,black);
+}
+
+/* PLAYER */
+.player{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.player video{
+  width:80%;
+  max-width:900px;
+  border-radius:10px;
+}
+
+.player button{
+  margin-top:15px;
+  padding:10px 20px;
+  background:var(--red);
+  border:none;
+  color:white;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:25px;
+  color:#aaa;
+}
+
+/* HIDDEN */
+.hidden{display:none;}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">Zerox.movies.ir</div>
+<input id="search" placeholder="جستجوی فیلم...">
+</header>
+
+<!-- HERO -->
+<div class="hero">
+
+<div class="slide active" style="background-image:url('https://picsum.photos/1200/700?1')"></div>
+<div class="slide" style="background-image:url('https://picsum.photos/1200/700?2')"></div>
+<div class="slide" style="background-image:url('https://picsum.photos/1200/700?3')"></div>
+
+<div class="hero-text">
+<h1>Zerox Movies</h1>
+<p>دنیای فیلم و سریال با کیفیت سینمایی</p>
+</div>
+
+</div>
+
+<!-- MOVIES -->
+<section>
+<h2>🔥 فیلم‌های محبوب</h2>
+<div class="row" id="movies"></div>
+</section>
+
+<section>
+<h2>🎬 سریال‌ها</h2>
+<div class="row" id="series"></div>
+</section>
+
+<section>
+<h2>⭐ جدیدترین‌ها</h2>
+<div class="row" id="new"></div>
+</section>
+
+<footer>
+© Zerox.movies.ir — All Rights Reserved
+</footer>
+
+<!-- PLAYER -->
+<div class="player hidden" id="player">
+<video id="video" controls></video>
+<button onclick="closePlayer()">بستن</button>
+</div>
+
+<script>
+
+const movies = [
+{t:"Joker",i:"https://picsum.photos/200/300?1",v:"https://www.w3schools.com/html/mov_bbb.mp4"},
+{t:"Interstellar",i:"https://picsum.photos/200/300?2",v:"https://www.w3schools.com/html/movie.mp4"},
+{t:"Batman",i:"https://picsum.photos/200/300?3",v:"https://www.w3schools.com/html/mov_bbb.mp4"},
+{t:"Dune",i:"https://picsum.photos/200/300?4",v:"https://www.w3schools.com/html/movie.mp4"},
+{t:"Drive",i:"https://picsum.photos/200/300?5",v:"https://www.w3schools.com/html/mov_bbb.mp4"}
+];
+
+// render
+function render(){
+let box=document.getElementById("movies");
+box.innerHTML="";
+movies.forEach(m=>{
+box.innerHTML+=`
+<div class="card" onclick="play('${m.v}')">
+<img src="${m.i}">
+<span>${m.t}</span>
+</div>`;
+});
+}
+render();
+
+// play video
+function play(src){
+document.getElementById("player").classList.remove("hidden");
+document.getElementById("video").src=src;
+document.getElementById("video").play();
+}
+
+function closePlayer(){
+document.getElementById("player").classList.add("hidden");
+document.getElementById("video").pause();
+}
+
+// search
+document.getElementById("search").addEventListener("input",e=>{
+let val=e.target.value.toLowerCase();
+let filtered=movies.filter(m=>m.t.toLowerCase().includes(val));
+
+let box=document.getElementById("movies");
+box.innerHTML="";
+
+filtered.forEach(m=>{
+box.innerHTML+=`
+<div class="card" onclick="play('${m.v}')">
+<img src="${m.i}">
+<span>${m.t}</span>
+</div>`;
+});
+});
+
+// slider
+let slides=document.querySelectorAll(".slide");
+let i=0;
+
+setInterval(()=>{
+slides[i].classList.remove("active");
+i=(i+1)%slides.length;
+slides[i].classList.add("active");
+},4000);
+
+</script>
+
+</body>
+  </html>
