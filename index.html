@@ -9,19 +9,24 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@700&display=swap" rel="stylesheet">
 
-<!-- 🔴 CUSTOM ICON (SVG) -->
+<!-- 🔴 ICON -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-<rect width='100' height='100' fill='%230b0b0b'/>
-<circle cx='50' cy='50' r='32' fill='none' stroke='%23B61C1C' stroke-width='6'/>
-<text x='50' y='63' font-size='40' text-anchor='middle' fill='%23B61C1C' font-family='Arial'>Z</text>
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'>
+<defs>
+<radialGradient id='g' cx='50%' cy='50%'>
+<stop offset='0%' stop-color='%23B61C1C'/>
+<stop offset='100%' stop-color='%23000000'/>
+</radialGradient>
+</defs>
+<rect width='120' height='120' fill='url(%23g)'/>
+<text x='60' y='75' font-size='60' text-anchor='middle' fill='white' font-family='Arial'>Z</text>
 </svg>">
 
 <style>
 
 :root{
   --red:#B61C1C;
-  --bg:#0b0b0b;
+  --bg:#060606;
 }
 
 *{
@@ -35,9 +40,10 @@
 body{
   background:var(--bg);
   color:white;
+  overflow-x:hidden;
 }
 
-/* HEADER */
+/* GLASS HEADER */
 header{
   position:fixed;
   top:0;
@@ -45,130 +51,152 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:14px 6%;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid #1a1a1a;
+  padding:18px 7%;
+  background:rgba(10,10,10,0.6);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
   z-index:1000;
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
+  font-size:22px;
   color:var(--red);
-  font-size:18px;
-}
-
-.logo span{
-  width:10px;
-  height:10px;
-  background:var(--red);
-  border-radius:50%;
-  box-shadow:0 0 12px var(--red);
+  text-shadow:0 0 25px var(--red);
+  letter-spacing:1px;
 }
 
 input{
-  background:#141414;
-  border:none;
-  padding:9px 14px;
+  width:240px;
+  padding:10px 14px;
   border-radius:999px;
-  color:white;
+  border:none;
   outline:none;
-  width:170px;
+  background:#111;
+  color:white;
+  transition:.3s;
 }
 
-/* HERO */
+input:focus{
+  box-shadow:0 0 25px rgba(182,28,28,0.5);
+}
+
+/* HERO ULTRA CINEMA */
 .hero{
-  margin-top:65px;
-  height:65vh;
+  margin-top:75px;
+  height:90vh;
   position:relative;
+  overflow:hidden;
 }
 
 .hero img{
   width:100%;
   height:100%;
   object-fit:cover;
-  filter:brightness(0.5);
+  filter:brightness(0.35) contrast(1.2);
+  transform:scale(1.08);
 }
 
-.hero-text{
+.hero-overlay{
   position:absolute;
-  bottom:40px;
-  right:6%;
-  max-width:420px;
-  animation:fade 1.2s ease;
+  inset:0;
+  background:
+    radial-gradient(circle at right, rgba(182,28,28,0.35), transparent 60%),
+    linear-gradient(to top, #060606, transparent 60%);
 }
 
-.hero-text h1{
-  font-size:34px;
+.hero-content{
+  position:absolute;
+  bottom:90px;
+  right:7%;
+  max-width:600px;
+  animation:up 1s ease;
 }
 
-.hero-text p{
-  margin-top:8px;
-  color:#bbb;
-}
-
-@keyframes fade{
-  from{opacity:0; transform:translateY(20px);}
+@keyframes up{
+  from{opacity:0; transform:translateY(40px);}
   to{opacity:1; transform:translateY(0);}
 }
 
-/* SECTION */
+.hero-content h1{
+  font-size:52px;
+  line-height:1.2;
+}
+
+.hero-content p{
+  margin-top:12px;
+  color:#ccc;
+}
+
+/* SECTIONS */
 section{
-  padding:30px 6%;
+  padding:50px 7%;
 }
 
 h2{
+  margin-bottom:18px;
   color:var(--red);
-  font-size:16px;
-  margin-bottom:14px;
+  font-size:18px;
+  letter-spacing:1px;
 }
 
-/* ROW */
+/* NETFLIX ROW SYSTEM */
 .row{
   display:flex;
-  gap:12px;
+  gap:14px;
   overflow-x:auto;
   padding-bottom:10px;
+  scroll-behavior:smooth;
 }
 
-.row::-webkit-scrollbar{
-  display:none;
-}
+.row::-webkit-scrollbar{display:none;}
 
-/* CARD MINIMAL */
+/* 3D CARD ULTRA */
 .card{
-  min-width:150px;
-  height:220px;
-  border-radius:12px;
+  min-width:180px;
+  height:270px;
+  border-radius:16px;
   overflow:hidden;
   position:relative;
   cursor:pointer;
-  transition:.25s;
+  transition:.4s;
+  transform-style:preserve-3d;
+  flex-shrink:0;
+}
+
+.card:hover{
+  transform:scale(1.08) rotateY(6deg);
+  box-shadow:0 0 30px rgba(182,28,28,0.4);
 }
 
 .card img{
   width:100%;
   height:100%;
   object-fit:cover;
+  transform:scale(1.1);
+  transition:.5s;
 }
 
-.card:hover{
-  transform:scale(1.04);
+.card:hover img{
+  transform:scale(1.25);
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.95), transparent 60%);
 }
 
 .card span{
   position:absolute;
-  bottom:0;
-  width:100%;
-  padding:8px;
+  bottom:10px;
+  right:10px;
+  left:10px;
   text-align:center;
-  background:linear-gradient(transparent,rgba(0,0,0,0.85));
-  font-size:13px;
+  font-size:14px;
 }
 
-/* PLAYER */
+/* PLAYER ULTRA */
 .player{
   position:fixed;
   inset:0;
@@ -181,19 +209,21 @@ h2{
 }
 
 .player video{
-  width:85%;
-  max-width:900px;
-  border-radius:10px;
+  width:90%;
+  max-width:1100px;
+  border-radius:14px;
+  box-shadow:0 0 60px rgba(0,0,0,0.8);
 }
 
 .player button{
-  margin-top:12px;
-  padding:9px 16px;
-  background:var(--red);
+  margin-top:16px;
+  padding:10px 18px;
   border:none;
-  border-radius:8px;
+  border-radius:10px;
+  background:var(--red);
   color:white;
   cursor:pointer;
+  box-shadow:0 0 20px rgba(182,28,28,0.4);
 }
 
 .hidden{display:none;}
@@ -204,48 +234,55 @@ h2{
 <body>
 
 <header>
-
-<div class="logo">
-<span></span>
-Zerox.movies.ir
-</div>
-
-<input id="search" placeholder="جستجو...">
-
+<div class="logo">Zerox.movies.ir</div>
+<input id="search" placeholder="جستجوی فیلم...">
 </header>
 
 <!-- HERO -->
 <div class="hero">
 <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4">
-<div class="hero-text">
-<h1>Zerox Movies</h1>
-<p>ساده، سریع، سینمایی</p>
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+<h1>سینما، بازتعریف شده</h1>
+<p>Zerox Movies — تجربه‌ای سنگین، مدرن و سینمایی در حد پلتفرم‌های واقعی</p>
 </div>
 </div>
 
-<!-- MOVIES -->
+<!-- ROWS -->
 <section>
-<h2>فیلم‌های منتخب</h2>
+<h2>🔥 Trending</h2>
 <div class="row" id="movies"></div>
+</section>
+
+<section>
+<h2>⭐ Popular</h2>
+<div class="row" id="movies2"></div>
+</section>
+
+<section>
+<h2>🎬 New Releases</h2>
+<div class="row" id="movies3"></div>
 </section>
 
 <!-- PLAYER -->
 <div class="player hidden" id="player">
 <video id="video" controls></video>
-<button onclick="closePlayer()">بستن</button>
+<button onclick="closePlayer()">Close</button>
 </div>
 
 <script>
 
 const movies=[
-{t:"Joker",i:"https://picsum.photos/300/400?1",v:"https://www.w3schools.com/html/mov_bbb.mp4"},
-{t:"Interstellar",i:"https://picsum.photos/300/400?2",v:"https://www.w3schools.com/html/movie.mp4"},
-{t:"Batman",i:"https://picsum.photos/300/400?3",v:"https://www.w3schools.com/html/mov_bbb.mp4"},
-{t:"Dune",i:"https://picsum.photos/300/400?4",v:"https://www.w3schools.com/html/movie.mp4"}
+{t:"Joker",i:"https://picsum.photos/400/600?1",v:"https://www.w3schools.com/html/mov_bbb.mp4"},
+{t:"Interstellar",i:"https://picsum.photos/400/600?2",v:"https://www.w3schools.com/html/movie.mp4"},
+{t:"Batman",i:"https://picsum.photos/400/600?3",v:"https://www.w3schools.com/html/mov_bbb.mp4"},
+{t:"Dune",i:"https://picsum.photos/400/600?4",v:"https://www.w3schools.com/html/movie.mp4"},
+{t:"Drive",i:"https://picsum.photos/400/600?5",v:"https://www.w3schools.com/html/mov_bbb.mp4"}
 ];
 
-function render(){
-let box=document.getElementById("movies");
+function render(id){
+let box=document.getElementById(id);
 box.innerHTML="";
 movies.forEach(m=>{
 box.innerHTML+=`
@@ -255,7 +292,10 @@ box.innerHTML+=`
 </div>`;
 });
 }
-render();
+
+render("movies");
+render("movies2");
+render("movies3");
 
 function play(src){
 document.getElementById("player").classList.remove("hidden");
@@ -271,15 +311,9 @@ document.getElementById("video").pause();
 document.getElementById("search").addEventListener("input",e=>{
 let v=e.target.value.toLowerCase();
 let f=movies.filter(m=>m.t.toLowerCase().includes(v));
-let box=document.getElementById("movies");
-box.innerHTML="";
-f.forEach(m=>{
-box.innerHTML+=`
-<div class="card" onclick="play('${m.v}')">
-<img src="${m.i}">
-<span>${m.t}</span>
-</div>`;
-});
+render("movies");
+render("movies2");
+render("movies3");
 });
 
 </script>
