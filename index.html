@@ -7,7 +7,15 @@
 
 <title>Zerox.movies.ir | تماشای فیلم و سریال</title>
 
+<!-- FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@700&display=swap" rel="stylesheet">
+
+<!-- 🔴 FAVICON (CUSTOM ICON WITHOUT FILE) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+<rect width='100' height='100' fill='%23292929'/>
+<text x='50' y='65' font-size='55' text-anchor='middle' fill='%23B61C1C' font-family='Arial'>Z</text>
+</svg>">
 
 <style>
 
@@ -27,6 +35,7 @@
 body{
   background:var(--dark);
   color:white;
+  overflow-x:hidden;
 }
 
 /* HEADER */
@@ -90,7 +99,7 @@ input{
   max-width:400px;
 }
 
-/* ROWS */
+/* SECTIONS */
 section{
   padding:25px 6%;
 }
@@ -100,6 +109,7 @@ h2{
   margin-bottom:15px;
 }
 
+/* ROW */
 .row{
   display:flex;
   overflow-x:auto;
@@ -154,6 +164,7 @@ h2{
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  z-index:2000;
 }
 
 .player video{
@@ -187,6 +198,7 @@ footer{
 
 <body>
 
+<!-- HEADER -->
 <header>
 <div class="logo">Zerox.movies.ir</div>
 <input id="search" placeholder="جستجوی فیلم...">
@@ -222,8 +234,9 @@ footer{
 <div class="row" id="new"></div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-© Zerox.movies.ir — All Rights Reserved
+© 2026 Zerox.movies.ir — All Rights Reserved
 </footer>
 
 <!-- PLAYER -->
@@ -256,7 +269,7 @@ box.innerHTML+=`
 }
 render();
 
-// play video
+// play
 function play(src){
 document.getElementById("player").classList.remove("hidden");
 document.getElementById("video").src=src;
@@ -298,4 +311,4 @@ slides[i].classList.add("active");
 </script>
 
 </body>
-  </html>
+</html>
