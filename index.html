@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zerox.movies.ir | سینمای حرفه‌ای</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <title>Zerox.movies.ir | تماشای آنلاین فیلم</title>
     <style>
         * {
             margin: 0;
@@ -15,430 +12,210 @@
         }
 
         body {
-            font-family: 'Vazirmatn', sans-serif;
-            background: #121212;
-            color: #E0E0E0;
-            line-height: 1.6;
-        }
-
-        :root {
-            --bg-dark: #121212;
-            --netflix-red: #E50914;
-            --text-light: #E0E0E0;
-            --text-gray: #b3b3b3;
-            --card-bg: #1f1f1f;
+            font-family: system-ui, 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(145deg, #0a0f1e 0%, #0c1222 100%);
+            color: #eef5ff;
+            padding: 20px;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
         }
 
-        /* نوار بالا */
-        .navbar {
-            background: rgba(18, 18, 18, 0.95);
-            backdrop-filter: blur(12px);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid var(--netflix-red);
-        }
-        .nav-flex {
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1.2rem;
+            gap: 15px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #2a3448;
+            padding-bottom: 20px;
         }
-        .logo h1 {
+
+        .logo {
             font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--netflix-red);
-            letter-spacing: -1px;
-        }
-        .logo p {
-            font-size: 0.7rem;
-            color: var(--text-gray);
-        }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
             font-weight: 800;
-            transition: 0.2s;
+            background: linear-gradient(135deg, #ffb347, #ff6b4a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
         }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--netflix-red);
+
+        .logo span {
+            font-size: 1rem;
+            background: none;
+            color: #7f8fa4;
+            font-weight: normal;
         }
-        .search-box {
-            background: rgba(255,255,255,0.08);
-            padding: 0.5rem 1.2rem;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            border: 1px solid #333;
-        }
-        .search-box i {
-            color: var(--netflix-red);
-        }
+
         .search-box input {
-            background: transparent;
+            padding: 12px 20px;
+            border-radius: 40px;
             border: none;
+            background: #1e2538;
+            color: #fff;
+            width: 260px;
+            font-size: 0.9rem;
             outline: none;
-            color: var(--text-light);
-            font-family: inherit;
-            font-weight: 600;
-        }
-        .search-box input::placeholder {
-            color: var(--text-gray);
-        }
-
-        /* هیرو */
-        .hero {
-            margin: 2rem 0;
-        }
-        .hero-slide {
-            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
-            padding: 3rem;
-            border-radius: 0.8rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            border: 1px solid #2a2a2a;
-        }
-        .hero-text h2 {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--netflix-red);
-        }
-        .hero-text p {
-            margin: 1rem 0;
-            font-weight: 600;
-            color: var(--text-gray);
-        }
-        .btn-primary {
-            background: var(--netflix-red);
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 0.4rem;
-            color: white;
-            font-weight: 900;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            cursor: pointer;
             transition: 0.2s;
         }
-        .btn-primary:hover {
-            background: #b80710;
-            transform: scale(1.02);
-        }
-        .hero-icon i {
-            font-size: 5rem;
-            color: var(--netflix-red);
+
+        .search-box input:focus {
+            background: #2a334a;
+            box-shadow: 0 0 0 2px #ff6b4a80;
         }
 
-        /* بخش‌ها */
-        .section {
-            margin: 3rem 0;
-        }
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .section-header h3 {
-            font-size: 1.5rem;
-            font-weight: 900;
-            border-right: 4px solid var(--netflix-red);
-            padding-right: 1rem;
-            color: var(--text-light);
-        }
-        .section-header a {
-            color: var(--text-gray);
-            font-weight: 800;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-        .section-header a:hover {
-            color: var(--netflix-red);
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
         }
 
-        /* اسلایدر */
-        .swiper {
+        .movie-card {
+            background: #11161f;
+            border-radius: 20px;
             overflow: hidden;
-            border-radius: 0.6rem;
-        }
-        .swiper-slide {
-            background: var(--card-bg);
-            border-radius: 0.6rem;
-            overflow: hidden;
-            transition: 0.3s;
+            transition: transform 0.2s ease, box-shadow 0.2s;
             cursor: pointer;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.5);
         }
-        .swiper-slide:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
+
+        .movie-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -12px black;
         }
-        .slide-poster {
-            height: 240px;
-            background: linear-gradient(145deg, #2a2a2a, #151515);
+
+        .poster-place {
+            background: linear-gradient(145deg, #1f2a3e, #131a28);
+            height: 260px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
-            color: var(--netflix-red);
-            position: relative;
-        }
-        .badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--netflix-red);
-            color: white;
-            padding: 0.2rem 0.7rem;
-            border-radius: 0.3rem;
-            font-size: 0.7rem;
-            font-weight: 800;
-        }
-        .slide-info {
-            padding: 1rem;
-        }
-        .slide-info h4 {
-            font-weight: 800;
-            color: var(--text-light);
-        }
-        .slide-info p {
-            font-size: 0.8rem;
-            color: var(--text-gray);
+            font-weight: bold;
+            color: #ffb34780;
         }
 
-        /* گرید فیلم */
-        .movies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-            gap: 1.5rem;
+        .movie-info {
+            padding: 16px 12px;
         }
-        .movie-card {
-            background: var(--card-bg);
-            border-radius: 0.6rem;
+
+        .movie-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            white-space: nowrap;
             overflow: hidden;
-            transition: 0.3s;
-            cursor: pointer;
+            text-overflow: ellipsis;
         }
-        .movie-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
-        }
-        .card-poster {
-            height: 220px;
-            background: linear-gradient(135deg, #2a2a2a, #151515);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.8rem;
-            color: var(--netflix-red);
-        }
-        .card-info {
-            padding: 1rem;
-        }
-        .card-info h4 {
-            font-weight: 800;
-            margin-bottom: 0.3rem;
-            color: var(--text-light);
-        }
-        .rating {
-            color: #ffc107;
-            font-weight: 800;
+
+        .movie-year {
             font-size: 0.8rem;
+            color: #9aa8c2;
         }
 
-        /* آمار - بدون عدد 10005 */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .stat-card {
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
-            border-radius: 0.6rem;
-            padding: 1.2rem;
-            text-align: center;
-            transition: 0.2s;
-        }
-        .stat-card:hover {
-            border-color: var(--netflix-red);
-        }
-        .stat-card i {
-            font-size: 2rem;
-            color: var(--netflix-red);
-        }
-        .stat-card .number {
-            font-size: 1.6rem;
-            font-weight: 900;
-            display: block;
-            margin: 0.5rem 0;
-            color: var(--text-light);
-        }
-        .stat-card span:last-child {
-            color: var(--text-gray);
-        }
-
-        /* فوتر */
         .footer {
-            margin-top: 3rem;
-            padding: 2rem;
+            margin-top: 60px;
             text-align: center;
-            border-top: 1px solid #2a2a2a;
-            color: var(--text-gray);
-        }
-        .footer strong {
-            color: var(--netflix-red);
-        }
-
-        p, h1, h2, h3, h4, a, span, li {
-            font-weight: 700 !important;
-        }
-        h1, h2, h3, .number {
-            font-weight: 900 !important;
+            font-size: 0.75rem;
+            color: #5f6c84;
+            padding: 20px 0;
+            border-top: 1px solid #1f2538;
         }
 
-        @media (max-width: 768px) {
-            .container { padding: 0 1rem; }
-            .hero-text h2 { font-size: 1.4rem; }
-            .nav-flex { flex-direction: column; }
-            .hero-slide { padding: 1.5rem; }
+        @media (max-width: 550px) {
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 16px;
+            }
+            .poster-place {
+                height: 200px;
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-
-<div class="navbar">
-    <div class="container nav-flex">
+<div class="container">
+    <header>
         <div class="logo">
-            <h1>Zerox.movies.ir</h1>
-            <p><i class="fas fa-film"></i> سینمای حرفه‌ای</p>
-        </div>
-        <div class="nav-links">
-            <a href="#" class="active">خانه</a>
-            <a href="#">فیلم‌ها</a>
-            <a href="#">سریال‌ها</a>
-            <a href="#">پربازدید</a>
-            <a href="#">لیست من</a>
+            Zerox.movies<span>.ir</span>
         </div>
         <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="عنوان فیلم، بازیگر...">
+            <input type="text" id="searchInput" placeholder="جستجوی فیلم ...">
         </div>
+    </header>
+
+    <h2 style="font-weight: 500; font-size: 1.2rem;">🔥 جدیدترین و محبوب‌ترین‌ها</h2>
+    <div class="movies-grid" id="moviesContainer"></div>
+    <div class="footer">
+        © Zerox.movies.ir - تماشای آنلاین بدون تبلیغ | تمامی فیلم‌ها با کیفیت بالا
     </div>
 </div>
 
-<div class="container">
-    <div class="hero">
-        <div class="hero-slide">
-            <div class="hero-text">
-                <h2>Zerox.movies.ir</h2>
-                <p>تم اختصاصی <strong style="color:#E50914">#121212 + #E50914</strong> | تجربه‌ای مثل نتفلیکس، اما ایرانی</p>
-                <button class="btn-primary" id="heroBtn"><i class="fas fa-play"></i> شروع تماشا</button>
-            </div>
-            <div class="hero-icon">
-                <i class="fas fa-ticket-alt"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-header">
-            <h3><i class="fas fa-fire"></i> پربیننده‌ترین هفته</h3>
-            <a href="#">مشاهده همه <i class="fas fa-arrow-left"></i></a>
-        </div>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><div class="slide-poster"><i class="fas fa-robot"></i><div class="badge">4K</div></div><div class="slide-info"><h4>بلید رانر 2049</h4><p>علمی تخیلی</p></div></div>
-                <div class="swiper-slide"><div class="slide-poster"><i class="fas fa-crown"></i><div class="badge">اسکار</div></div><div class="slide-info"><h4>اوپنهایمر</h4><p>درام تاریخی</p></div></div>
-                <div class="swiper-slide"><div class="slide-poster"><i class="fas fa-mask"></i><div class="badge">جدید</div></div><div class="slide-info"><h4>جوکر: جنون</h4><p>روانشناختی</p></div></div>
-                <div class="swiper-slide"><div class="slide-poster"><i class="fas fa-dragon"></i><div class="badge">IMAX</div></div><div class="slide-info"><h4>ارباب حلقه‌ها</h4><p>فانتزی حماسی</p></div></div>
-                <div class="swiper-slide"><div class="slide-poster"><i class="fas fa-hand-fist"></i><div class="badge">اکشن</div></div><div class="slide-info"><h4>جان ویک 4</h4><p>اکشن محض</p></div></div>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-header">
-            <h3><i class="fas fa-star"></i> پیشنهاد زروکس</h3>
-            <a href="#">بیشتر <i class="fas fa-arrow-left"></i></a>
-        </div>
-        <div class="movies-grid">
-            <div class="movie-card"><div class="card-poster"><i class="fas fa-skull"></i></div><div class="card-info"><h4>مهاجر مخفی</h4><div class="rating"><i class="fas fa-star"></i> 8.7</div></div></div>
-            <div class="movie-card"><div class="card-poster"><i class="fas fa-ghost"></i></div><div class="card-info"><h4>شب بی‌پایان</h4><div class="rating"><i class="fas fa-star"></i> 8.2</div></div></div>
-            <div class="movie-card"><div class="card-poster"><i class="fas fa-rocket"></i></div><div class="card-info"><h4>اینتراستلار</h4><div class="rating"><i class="fas fa-star"></i> 9.3</div></div></div>
-            <div class="movie-card"><div class="card-poster"><i class="fas fa-dice-d6"></i></div><div class="card-info"><h4>تاجر و دیوانه</h4><div class="rating"><i class="fas fa-star"></i> 8.9</div></div></div>
-            <div class="movie-card"><div class="card-poster"><i class="fas fa-crown"></i></div><div class="card-info"><h4>ناپلئون</h4><div class="rating"><i class="fas fa-star"></i> 7.9</div></div></div>
-            <div class="movie-card"><div class="card-poster"><i class="fas fa-mask"></i></div><div class="card-info"><h4>بتمن</h4><div class="rating"><i class="fas fa-star"></i> 8.8</div></div></div>
-        </div>
-    </div>
-
-    <div class="stats-row">
-        <div class="stat-card"><i class="fas fa-film"></i><span class="number">3,200+</span><span>فیلم و سریال</span></div>
-        <div class="stat-card"><i class="fas fa-users"></i><span class="number">2.1M</span><span>کاربر فعال</span></div>
-        <div class="stat-card"><i class="fas fa-tv"></i><span class="number">4K HDR</span><span>کیفیت اصلی</span></div>
-        <div class="stat-card"><i class="fas fa-globe"></i><span class="number">IR</span><span>پخش اختصاصی</span></div>
-    </div>
-
-    <div class="section">
-        <div class="section-header">
-            <h3><i class="fas fa-clock"></i> جدیدترین اکران آنلاین</h3>
-            <a href="#">بیشتر <i class="fas fa-arrow-left"></i></a>
-        </div>
-        <div class="movies-grid">
-            <div class="movie-card"><div class="card-poster"><i class="fas fa-dragon"></i></div><div class="card-info"><h4>هابیت 3</h4><div class="rating">IMDb 8.4</div></div></div>
-            <div class="movie-card"><div class="card-poster"><i class="fas fa-meteor"></i></div><div class="card-info"><h4>دان 2</h4><div class="rating">IMDb 8.1</div></div></div>
-            <div class="movie-card"><div class="card-poster"><i class="fas fa-robot"></i></div><div class="card-info"><h4>مشین</h4><div class="rating">IMDb 7.8</div></div></div>
-            <div class="movie-card"><div class="card-poster"><i class="fas fa-crown"></i></div><div class="card-info"><h4>امپراتور</h4><div class="rating">IMDb 8.0</div></div></div>
-        </div>
-    </div>
-</div>
-
-<div class="footer">
-    <i class="fas fa-copyright"></i> <strong>Zerox.movies.ir</strong><br>
-    <span style="font-size: 0.75rem;">تم اختصاصی #121212 + #E50914 | طراحی حرفه‌ای به سبک نتفلیکس</span>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-    const swiper = new Swiper('.mySwiper', {
-        slidesPerView: 2,
-        spaceBetween: 20,
-        pagination: { el: '.swiper-pagination', clickable: true },
-        breakpoints: {
-            640: { slidesPerView: 2 },
-            768: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 }
+    // دیتابیس کوچک از فیلم‌ها (ساختگی برای حجم 50KB)
+    const moviesData = [
+        { title: "اوپنهایمر", year: 2023, poster: "⚛️" },
+        { title: "باربی", year: 2023, poster: "🎀" },
+        { title: "دانکرک", year: 2017, poster: "⛴️" },
+        { title: "تنت", year: 2020, poster: "🔄" },
+        { title: "پارازیت", year: 2019, poster: "🏠" },
+        { title: "جوی رایدر", year: 2021, poster: "🏍️" },
+        { title: "مرد عنکبوتی: راهی به خانه نیست", year: 2021, poster: "🕷️" },
+        { title: "ژوکر", year: 2019, poster: "🎭" },
+        { title: "بین ستاره‌ای", year: 2014, poster: "🪐" },
+        { title: "جان ویک ۴", year: 2023, poster: "🔫" },
+        { title: "افسانه‌های محافظ", year: 2022, poster: "⚡" },
+        { title: "مأمور مخفی", year: 2024, poster: "🕵️" }
+    ];
+
+    function renderMovies(filterText = "") {
+        const container = document.getElementById("moviesContainer");
+        if (!container) return;
+
+        const lowerFilter = filterText.toLowerCase();
+        const filtered = moviesData.filter(movie => 
+            movie.title.toLowerCase().includes(lowerFilter)
+        );
+
+        if (filtered.length === 0) {
+            container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:50px;">🎬 فیلمی با این نام پیدا نشد!</div>`;
+            return;
         }
-    });
 
-    document.getElementById('heroBtn')?.addEventListener('click', () => {
-        alert("🎬 به Zerox.movies.ir خوش آمدی!");
-    });
+        let html = "";
+        for (let movie of filtered) {
+            html += `
+                <div class="movie-card" onclick="alert('در حال پخش: ${movie.title} (${movie.year}) \nلینک واقعی در نسخه نهایی اضافه خواهد شد.')">
+                    <div class="poster-place">
+                        ${movie.poster}
+                    </div>
+                    <div class="movie-info">
+                        <div class="movie-title">${movie.title}</div>
+                        <div class="movie-year">${movie.year}</div>
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+    }
 
-    document.querySelectorAll('.movie-card, .swiper-slide').forEach(card => {
-        card.addEventListener('click', () => {
-            alert("🎞️ پخش آنلاین | کیفیت 4K HDR");
+    // جستجوی لحظه‌ای
+    const searchInput = document.getElementById("searchInput");
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            renderMovies(e.target.value);
         });
-    });
+    }
+
+    // بار اولیه
+    renderMovies();
 </script>
 </body>
-    </html>
+</html>
