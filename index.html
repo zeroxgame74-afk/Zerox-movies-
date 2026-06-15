@@ -2,12 +2,14 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZEROX.MOVIES.IR | سینمای نئونوآر</title>
-    <!-- Font Awesome 6 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Zerox.movies.ir | پلتفرم تخصصی سینما و سریال</title>
+    <!-- Font Awesome 6 (آیکون‌های awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Plus Jakarta Sans (bold variants) -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Vazirmatn با وزن‌های بولدر -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Swiper JS (برای اسلایدر حرفه‌ای) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         * {
             margin: 0;
@@ -16,374 +18,461 @@
         }
 
         body {
-            background: #0a0a0a;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: #eaeaea;
-            line-height: 1.5;
-            overflow-x: hidden;
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(145deg, #f8fafc 0%, #edf2f7 100%);
+            color: #0f172a;
+            line-height: 1.6;
         }
 
-        /* رنگ اصلی */
+        /* تم اصلی آبی خاص 1E96B8 */
         :root {
-            --primary: #B61C1C;
-            --primary-dark: #8a1515;
-            --primary-glow: rgba(182, 28, 28, 0.4);
-            --dark-bg: #050505;
-            --card-bg: #111111;
-        }
-
-        /* اسکرول سفارشی */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
+            --primary: #1E96B8;
+            --primary-dark: #0f6e8a;
+            --primary-light: #5fc3e0;
+            --primary-soft: rgba(30, 150, 184, 0.12);
+            --primary-glow: rgba(30, 150, 184, 0.25);
+            --dark-bg: #0f172a;
+            --card-white: #ffffff;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 35px -10px rgba(30, 150, 184, 0.2);
         }
 
         .container {
-            max-width: 1440px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem;
         }
 
-        /* هدر مگا مدرن */
-        .hero {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #0c0c0c 0%, #030303 100%);
-            border-radius: 2rem;
-            margin-bottom: 3rem;
-            border: 1px solid rgba(182, 28, 28, 0.3);
-            position: relative;
-            overflow: hidden;
+        /* ========== ناوبری شیشه‌ای ========== */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--primary-soft);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.8rem 0;
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(182,28,28,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.2rem;
         }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .hero i {
-            font-size: 5rem;
-            color: var(--primary);
-            text-shadow: 0 0 30px var(--primary-glow);
-            position: relative;
-            z-index: 2;
-        }
-        .hero h1 {
-            font-size: 4rem;
+        .logo-area h1 {
+            font-size: 1.9rem;
             font-weight: 900;
-            letter-spacing: -2px;
-            background: linear-gradient(135deg, #ffffff, #B61C1C, #ff6b6b);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin: 1rem 0 0.5rem;
-            position: relative;
-            z-index: 2;
         }
-        .hero .tagline {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #aaaaaa;
-            position: relative;
-            z-index: 2;
+        .logo-area p {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: #475569;
         }
-
-        /* بخش‌ها */
-        .section {
-            margin-bottom: 3rem;
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            font-weight: 800;
         }
-        .section-title {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 2rem;
+        .nav-menu a {
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 800;
+            transition: 0.2s;
+        }
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--primary);
+        }
+        .search-wrapper {
+            background: #f1f5f9;
+            padding: 0.5rem 1.2rem;
+            border-radius: 3rem;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.6rem;
+        }
+        .search-wrapper i {
+            color: var(--primary);
+        }
+        .search-wrapper input {
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-weight: 600;
+            outline: none;
+            width: 180px;
+        }
+
+        /* ========== هیرو سکشن خاص ========== */
+        .hero-special {
+            background: linear-gradient(130deg, var(--primary-soft) 0%, #ffffff 70%);
+            border-radius: 2rem;
+            margin: 2rem 0;
+            padding: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+        .hero-content h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary-dark);
+        }
+        .hero-content p {
+            font-weight: 700;
+            margin: 0.8rem 0;
+            color: #334155;
+        }
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 3rem;
+            color: white;
+            font-weight: 800;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px var(--primary-glow);
+        }
+        .hero-icon i {
+            font-size: 7rem;
+            color: var(--primary);
+            opacity: 0.8;
+        }
+
+        /* ========== اسلایدر برتر ========== */
+        .section {
+            margin: 3rem 0;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .section-header h3 {
+            font-size: 1.6rem;
+            font-weight: 900;
             border-right: 5px solid var(--primary);
             padding-right: 1rem;
         }
-        .section-title i {
+        .section-header a {
             color: var(--primary);
-            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
         }
-
-        /* گرید فیلم‌ها */
-        .movies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
+        .swiper {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 1.5rem;
         }
-        .movie-card {
-            background: var(--card-bg);
+        .swiper-slide {
+            background: var(--card-white);
             border-radius: 1.2rem;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            border: 1px solid #222;
-            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-md);
         }
-        .movie-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(182, 28, 28, 0.3);
-        }
-        .card-poster {
-            height: 220px;
-            background: linear-gradient(45deg, #1a1a1a, #0a0a0a);
+        .slide-poster {
+            height: 260px;
+            background: linear-gradient(145deg, #e2e8f0, #cbd5e1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--primary);
             position: relative;
         }
-        .card-poster .badge {
+        .badge-new {
             position: absolute;
-            top: 1rem;
-            left: 1rem;
+            top: 12px;
+            right: 12px;
             background: var(--primary);
-            padding: 0.3rem 0.8rem;
+            padding: 0.2rem 0.8rem;
             border-radius: 2rem;
             font-size: 0.7rem;
             font-weight: 800;
+            color: white;
         }
-        .card-content {
-            padding: 1.5rem;
+        .slide-info {
+            padding: 1rem;
         }
-        .card-content h3 {
-            font-size: 1.3rem;
+        .slide-info h4 {
             font-weight: 800;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
-        .card-content p {
+        .slide-info p {
             font-weight: 600;
-            color: #999;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-        .movie-meta {
-            display: flex;
-            gap: 1rem;
             font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--primary);
+            color: #64748b;
         }
 
-        /* بخش استاتیک سنگین */
-        .stats-showcase {
-            background: linear-gradient(145deg, #0c0c0c, #050505);
-            border-radius: 1.5rem;
-            padding: 2rem;
+        /* ========== گرید فیلم‌ها ========== */
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.8rem;
+        }
+        .movie-card {
+            background: var(--card-white);
+            border-radius: 1.2rem;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+        .card-poster {
+            height: 240px;
+            background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+        }
+        .card-info {
+            padding: 1rem;
+        }
+        .card-info h4 {
+            font-weight: 800;
+            font-size: 1rem;
+        }
+        .rating {
+            color: #f59e0b;
+            font-weight: 800;
+            font-size: 0.8rem;
+            margin-top: 0.4rem;
+        }
+
+        /* ========== بخش عدد 10005.96 KB ========== */
+        .heavy-block {
+            background: linear-gradient(110deg, #ffffff, #f8fafc);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px dashed var(--primary);
+            margin: 2rem 0;
+        }
+        .heavy-block span {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary);
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+
+        /* ========== آمار  ========== */
+        .stats-container {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             gap: 2rem;
-            border: 1px solid #B61C1C;
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
         }
-        .stat-block {
+        .stat-item {
             text-align: center;
             flex: 1;
-            min-width: 150px;
         }
-        .stat-block i {
+        .stat-item i {
             font-size: 2.5rem;
             color: var(--primary);
-            margin-bottom: 0.5rem;
         }
         .stat-number {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 900;
-            direction: ltr;
             display: block;
         }
         .stat-label {
             font-weight: 700;
-            color: #bbb;
-            margin-top: 0.3rem;
+            color: #475569;
         }
 
-        /* المان عدد 10005.96 خاص */
-        .heavy-badge {
-            background: #000;
-            border: 2px dashed var(--primary);
-            padding: 1rem;
-            text-align: center;
-            border-radius: 1rem;
-            margin: 2rem 0;
-        }
-        .heavy-badge span {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--primary);
-            letter-spacing: 2px;
-        }
-
-        /* فوتر */
+        /* ========== فوتر حرفه‌ای ========== */
         .footer {
             margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid #222;
+            background: #0f172a;
+            color: #cbd5e1;
+            border-radius: 2rem 2rem 0 0;
+            padding: 2rem;
             text-align: center;
-            font-weight: 700;
+        }
+        .footer strong {
+            color: white;
         }
 
-        /* تمام متن‌ها بولدر */
-        p, h1, h2, h3, h4, a, span, li, button, .stat-label {
-            font-weight: 600 !important;
+        /* همه متن‌ها بولدر */
+        p, h1, h2, h3, h4, a, span, li, .stat-label, .badge-new {
+            font-weight: 700 !important;
         }
-        h1, h2, h3, .stat-number, .heavy-badge span {
+        h1, h2, h3, .stat-number, .logo-area h1, .heavy-block span {
             font-weight: 900 !important;
         }
 
         @media (max-width: 768px) {
-            .container { padding: 1rem; }
-            .hero h1 { font-size: 2.2rem; }
-            .section-title { font-size: 1.5rem; }
+            .container { padding: 0 1rem; }
+            .nav-flex { flex-direction: column; align-items: stretch; }
+            .hero-content h2 { font-size: 1.5rem; }
+            .hero-icon i { font-size: 4rem; }
+            .movies-grid { gap: 1rem; }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <!-- هدر خفن -->
-    <div class="hero">
-        <i class="fas fa-film"></i>
-        <h1>ZEROX.MOVIES.IR</h1>
-        <div class="tagline">
-            <i class="fas fa-crown"></i> سینمای سنگین · نسخه‌های نایاب · آرشیو 4K
-        </div>
-    </div>
 
-    <!-- فیلم ویژه -->
-    <div class="section">
-        <div class="section-title">
-            <i class="fas fa-fire"></i>
-            <span>انتخاب هفته · زروکس سینما</span>
+<!-- نوار بالا شیشه‌ای -->
+<div class="glass-nav">
+    <div class="container nav-flex">
+        <div class="logo-area">
+            <h1>Zerox.movies.ir</h1>
+            <p><i class="fas fa-bolt"></i> سینمای بی‌مرز</p>
         </div>
-        <div style="background: #0a0a0a; border-radius: 1.5rem; padding: 2rem; border-right: 6px solid #B61C1C;">
-            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;">
-                <i class="fas fa-skull" style="font-size: 4rem; color: #B61C1C;"></i>
-                <div>
-                    <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">BLADE RUNNER 2049 · نسخه کارگردان</h3>
-                    <p><strong>فرمت:</strong> 4K Dolby Vision + DTS:X | <strong>حجم نمادین:</strong> 10005.96 KB</p>
-                    <p>تنها در پلتفرم زروکس — بازیابی شده از مستر اصلی 2025</p>
-                    <span style="background: #B61C1C; padding: 0.2rem 1rem; border-radius: 2rem; display: inline-block; margin-top: 0.5rem; font-weight: 800;"><i class="fas fa-bolt"></i> لینک مستقیم سنگین</span>
-                </div>
-            </div>
+        <div class="nav-menu">
+            <a href="#" class="active">خانه</a>
+            <a href="#">فیلم‌ها</a>
+            <a href="#">سریال‌ها</a>
+            <a href="#">پربازدیدها</a>
+            <a href="#">دسته‌ها</a>
         </div>
-    </div>
-
-    <!-- گالری فیلم‌ها -->
-    <div class="section">
-        <div class="section-title">
-            <i class="fas fa-list-ul"></i>
-            <span>کاتالوگ نئونوآر · نایاب‌ترین‌ها</span>
+        <div class="search-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="عنوان فیلم، بازیگر...">
         </div>
-        <div class="movies-grid">
-            <div class="movie-card">
-                <div class="card-poster">
-                    <i class="fas fa-robot"></i>
-                    <div class="badge">IMAX</div>
-                </div>
-                <div class="card-content">
-                    <h3>متال سالواتیون</h3>
-                    <p>اکشن علمی تخیلی | نسخه 3 ساعته کارگردان</p>
-                    <div class="movie-meta"><i class="fas fa-database"></i> 8.7 GB · <i class="fas fa-microchip"></i> ZERO-X</div>
-                </div>
-            </div>
-            <div class="movie-card">
-                <div class="card-poster"><i class="fas fa-ghost"></i><div class="badge">نادر</div></div>
-                <div class="card-content">
-                    <h3>چهره‌های پنهان</h3>
-                    <p>درام روانشناختی · 4K HDR10+</p>
-                    <div class="movie-meta"><i class="fas fa-star"></i> 9.2 زروکس</div>
-                </div>
-            </div>
-            <div class="movie-card">
-                <div class="card-poster"><i class="fas fa-skull-crossbones"></i><div class="badge">Cult</div></div>
-                <div class="card-content">
-                    <h3>شب مردگان زنده ۲۰۲۵</h3>
-                    <p>بازسازی اتمسفریک | صداگذاری فضایی</p>
-                    <div class="movie-meta"><i class="fas fa-ticket"></i> نسخه کارگردان</div>
-                </div>
-            </div>
-            <div class="movie-card">
-                <div class="card-poster"><i class="fas fa-mask"></i><div class="badge">محدود</div></div>
-                <div class="card-content">
-                    <h3>سقوط فرشته‌ها</h3>
-                    <p>نئونوآر | 2024 · کاندید اسکار</p>
-                    <div class="movie-meta"><i class="fas fa-chart-line"></i> 4K ریمستر</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- بخش عدد 10005.96 KB (سنگین‌ترین بخش بصری) -->
-    <div class="heavy-badge">
-        <i class="fas fa-hdd" style="font-size: 2rem; color: #B61C1C;"></i>
-        <span>⚡ 10,005.96 KB ⚡</span>
-        <p style="margin-top: 0.5rem;">حجم سمبلیک ابرزروکس · رکورد جهانی ترافیک رمزنگاری شده</p>
-    </div>
-
-    <!-- آمار مدرن -->
-    <div class="stats-showcase">
-        <div class="stat-block">
-            <i class="fas fa-film"></i>
-            <span class="stat-number">1,482</span>
-            <span class="stat-label">فیلم نادر</span>
-        </div>
-        <div class="stat-block">
-            <i class="fas fa-database"></i>
-            <span class="stat-number">10005.96</span>
-            <span class="stat-label">کیلوبایت (نماد)</span>
-        </div>
-        <div class="stat-block">
-            <i class="fas fa-users"></i>
-            <span class="stat-number">247K</span>
-            <span class="stat-label">عضو فعال</span>
-        </div>
-        <div class="stat-block">
-            <i class="fas fa-tachometer-alt"></i>
-            <span class="stat-number">∞</span>
-            <span class="stat-label">پهنای باند زروکس</span>
-        </div>
-    </div>
-
-    <!-- دکمه اکشن -->
-    <div style="text-align: center; margin: 2rem 0;">
-        <button id="heavyBtn" style="background: #B61C1C; border: none; padding: 1rem 2.5rem; border-radius: 3rem; font-weight: 800; font-size: 1.1rem; color: white; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 0.8rem;">
-            <i class="fas fa-download"></i> دسترسی به سرور زروکس
-        </button>
-    </div>
-
-    <div class="footer">
-        <i class="fas fa-trademark"></i> <strong>ZEROX.MOVIES.IR · تمامی حقوق برای موتور جستجوی پیشرفته محفوظ است · رمزنگاری شده با استاندارد X-9K</strong><br>
-        <span style="font-size: 0.8rem;"><i class="fas fa-shield-alt"></i> حجم حقیقی صفحه: ۸۷ کیلوبایت | اما حس سنگین‌ترین سایت سینمایی جهان</span>
     </div>
 </div>
 
+<div class="container">
+    <!-- هیرو مدرن -->
+    <div class="hero-special">
+        <div class="hero-content">
+            <h2><i class="fas fa-crown" style="color:#1E96B8;"></i> زروکس مووی · تجربه‌ای متفاوت</h2>
+            <p>بیش از ۲۵۰۰ فیلم و سریال با کیفیت 4K و دوبله اختصاصی</p>
+            <button class="btn-primary" id="heroBtn"><i class="fas fa-play"></i> اشتراک زروکس +</button>
+        </div>
+        <div class="hero-icon">
+            <i class="fas fa-ticket-alt"></i>
+        </div>
+    </div>
+
+    <!-- اسلایدر برتر با swiper (خیلی خفن) -->
+    <div class="section">
+        <div class="section-header">
+            <h3><i class="fas fa-chart-line"></i> پربیننده‌ترین هفته</h3>
+            <a href="#">مشاهده همه <i class="fas fa-arrow-left"></i></a>
+        </div>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><div class="slide-poster"><i class="fas fa-dragon"></i><div class="badge-new">4K</div></div><div class="slide-info"><h4>ارباب حلقه‌ها</h4><p>فانتزی حماسی</p></div></div>
+                <div class="swiper-slide"><div class="slide-poster"><i class="fas fa-robot"></i><div class="badge-new">IMAX</div></div><div class="slide-info"><h4>بلید رانر ۲</h4><p>علمی تخیلی</p></div></div>
+                <div class="swiper-slide"><div class="slide-poster"><i class="fas fa-crown"></i><div class="badge-new">اسکار</div></div><div class="slide-info"><h4>اوپنهایمر</h4><p>درام تاریخی</p></div></div>
+                <div class="swiper-slide"><div class="slide-poster"><i class="fas fa-mask"></i><div class="badge-new">جدید</div></div><div class="slide-info"><h4>جوکر: جنون</h4><p>روانشناختی</p></div></div>
+                <div class="swiper-slide"><div class="slide-poster"><i class="fas fa-hand-fist"></i><div class="badge-new">اکشن</div></div><div class="slide-info"><h4>جان ویک ۴</h4><p>خشونت هنری</p></div></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <!-- گرید فیلم‌های پیشنهادی -->
+    <div class="section">
+        <div class="section-header">
+            <h3><i class="fas fa-fire"></i> پیشنهاد زروکس</h3>
+            <a href="#">همه <i class="fas fa-arrow-left"></i></a>
+        </div>
+        <div class="movies-grid">
+            <div class="movie-card"><div class="card-poster"><i class="fas fa-skull"></i></div><div class="card-info"><h4>مهاجر مخفی</h4><div class="rating"><i class="fas fa-star"></i> 8.7</div></div></div>
+            <div class="movie-card"><div class="card-poster"><i class="fas fa-ghost"></i></div><div class="card-info"><h4>شب بی‌پایان</h4><div class="rating"><i class="fas fa-star"></i> 8.2</div></div></div>
+            <div class="movie-card"><div class="card-poster"><i class="fas fa-rocket"></i></div><div class="card-info"><h4>اینتراستلار</h4><div class="rating"><i class="fas fa-star"></i> 9.3</div></div></div>
+            <div class="movie-card"><div class="card-poster"><i class="fas fa-dice-d6"></i></div><div class="card-info"><h4>تاجر و دیوانه</h4><div class="rating"><i class="fas fa-star"></i> 8.9</div></div></div>
+        </div>
+    </div>
+
+    <!-- بخش عدد سنگین 10005.96 KB -->
+    <div class="heavy-block">
+        <i class="fas fa-database" style="font-size: 2rem; color: #1E96B8;"></i>
+        <span>⚡ 10,005.96 KB ⚡</span>
+        <p style="margin-top: 0.6rem; font-weight: 700;">رکورد پایداری سرورهای زروکس · پخش بدون بافر</p>
+    </div>
+
+    <!-- آمار حرفه‌ای به سبک فیلیمو -->
+    <div class="stats-container">
+        <div class="stat-item"><i class="fas fa-film"></i><span class="stat-number">2,850+</span><span class="stat-label">عنوان سینمایی</span></div>
+        <div class="stat-item"><i class="fas fa-hdd"></i><span class="stat-number">10005.96</span><span class="stat-label">کیلوبایت نمادین</span></div>
+        <div class="stat-item"><i class="fas fa-user-group"></i><span class="stat-number">1.8M</span><span class="stat-label">کاربر فعال</span></div>
+        <div class="stat-item"><i class="fas fa-tv"></i><span class="stat-number">4K+</span><span class="stat-label">کیفیت اصلی</span></div>
+    </div>
+
+    <!-- بخش تازه‌ها -->
+    <div class="section">
+        <div class="section-header">
+            <h3><i class="fas fa-clock"></i> جدیدترین اکران آنلاین</h3>
+            <a href="#">بیشتر <i class="fas fa-arrow-left"></i></a>
+        </div>
+        <div class="movies-grid">
+            <div class="movie-card"><div class="card-poster"><i class="fas fa-dragon"></i></div><div class="card-info"><h4>هابیت ۳</h4><div class="rating">IMDb 8.4</div></div></div>
+            <div class="movie-card"><div class="card-poster"><i class="fas fa-meteor"></i></div><div class="card-info"><h4>دان ۲</h4><div class="rating">IMDb 8.1</div></div></div>
+            <div class="movie-card"><div class="card-poster"><i class="fas fa-mask"></i></div><div class="card-info"><h4>بتمن</h4><div class="rating">IMDb 8.9</div></div></div>
+            <div class="movie-card"><div class="card-poster"><i class="fas fa-crown"></i></div><div class="card-info"><h4>ناپلئون</h4><div class="rating">IMDb 7.7</div></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- فوتر -->
+<div class="footer">
+    <i class="fas fa-copyright"></i> <strong>Zerox.movies.ir – الهام گرفته از فیلیمو با هویت اختصاصی آبی آسمانی</strong><br>
+    <span style="font-size: 0.75rem;">تمامی حقوق محفوظ | طراحی شده با تکنولوژی زروکس کور | حجم واقعی صفحه < 100KB</span>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-    document.getElementById('heavyBtn')?.addEventListener('click', () => {
-        alert("🔴 ZEROX.MOVIES.IR 🔴\nشما به ابررسانه سنگین وارد شدید.\nحجم نمادین 10005.96 KB آماده دانلود رمزگذاری شده است.");
+    // اسلایدر حرفه‌ای
+    const swiper = new Swiper('.mySwiper', {
+        slidesPerView: 2,
+        spaceBetween: 20,
+        pagination: { el: '.swiper-pagination', clickable: true },
+        breakpoints: {
+            640: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 }
+        }
     });
-    // افکت کلیک روی کارت‌ها
-    document.querySelectorAll('.movie-card').forEach(card => {
+
+    // دکمه هیرو
+    document.getElementById('heroBtn')?.addEventListener('click', () => {
+        alert("🎬 به زروکس مووی خوش آمدی!\nتماشای آنلاین با کیفیت 4K و دوبله حرفه‌ای.");
+    });
+
+    // رویداد کلیک برای فیلم کارت‌ها
+    document.querySelectorAll('.movie-card, .swiper-slide').forEach(card => {
         card.addEventListener('click', () => {
-            alert("🎬 فیلم در آرشیو زروکس یافت شد.\nنسخه 4K + زیرنویس اختصاصی.");
+            alert("🎞️ پخش آنلاین فیلم در حال آماده‌سازی...\nکیفیت: 4K HDR | زیرنویس اختصاصی");
         });
     });
 </script>
 </body>
-            </html>
+                                                                                                                              </html>
